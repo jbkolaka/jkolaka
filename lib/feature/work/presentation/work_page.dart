@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../theme/spacing/app_spacing.dart';
+import '../widget/work_list.dart';
 
 class WorkPage extends StatelessWidget {
   const WorkPage({super.key});
@@ -12,37 +13,92 @@ class WorkPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: const [
-                Text('JOE KOLAKA'),
-                SizedBox(width: AppSpacing.spacing03),
-                Text('MOBILE DEVELOPER'),
-                SizedBox(width: AppSpacing.spacing03),
-                Text('*'),
-                SizedBox(width: AppSpacing.spacing03),
-                Text('GO BACKEND DEVELOPER'),
-              ],
+            Expanded(
+              child: Row(
+                children: [
+                  Text(
+                    'JOE KOLAKA',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(width: AppSpacing.spacing03),
+                  Flexible(
+                    child: Text(
+                      'MOBILE DEVELOPER',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.spacing03),
+                  const Text('*'),
+                  const SizedBox(width: AppSpacing.spacing03),
+                  Flexible(
+                    child: Text(
+                      'GO BACKEND DEVELOPER',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Row(
-              children: const [
-                Text('WORK'),
-                SizedBox(width: AppSpacing.spacing03),
-                Text('HACKATHONS'),
-                SizedBox(width: AppSpacing.spacing03),
-                Text('RESUME'),
-              ],
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Flexible(
+                    child: Text(
+                      'WORK',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.spacing03),
+                  Flexible(
+                    child: Text(
+                      'HACKATHONS',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.spacing03),
+                  Flexible(
+                    child: Text(
+                      'RESUME',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
-      body: const Column(
+      body: Column(
         children: [
-          SizedBox(height: AppSpacing.spacing09),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('I\'m a mobile and backend developer \nso full stack'),
-            ],
+          const Divider(height: 1),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.spacing06),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: AppSpacing.spacing10 * 2),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'I\'m a mobile and backend developer \nso full stack',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ),
+                      const Expanded(child: WorkList()),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
