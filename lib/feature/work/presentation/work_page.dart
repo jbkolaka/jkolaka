@@ -57,26 +57,23 @@ class WorkPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Flexible(
-                    child: Text(
-                      'WORK',
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text('WORK'),
                     ),
                   ),
                   const SizedBox(width: AppSpacing.spacing03),
                   Flexible(
-                    child: Text(
-                      'HACKATHONS',
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text('HACKATHONS'),
                     ),
                   ),
                   const SizedBox(width: AppSpacing.spacing03),
                   Flexible(
-                    child: Text(
-                      'RESUME',
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text('RESUME'),
                     ),
                   ),
                 ],
