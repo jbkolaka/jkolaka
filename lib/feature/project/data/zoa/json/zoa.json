@@ -1,0 +1,43 @@
+{
+  "header": {
+    "projectName": "Zoa",
+    "tags": ["Climate Change", "Prototype 2026"],
+    "title": "Solving the Social Issue to trash collection",
+    "heroImage": "assets/hero_placeholder.png"
+  },
+  "metadata": [
+    { "label": "ROLE", "value": "Mobile developer" },
+    { "label": "TIMELINE", "value": "August - September\n2026" },
+    { "label": "TEAM", "value": "3 members" },
+    { "label": "SKILLS", "value": "Bloc Implementation\nUI-UX Design" }
+  ],
+  "sidebar": [
+    { "id": "overview", "title": "Overview" },
+    { "id": "solution", "title": "Solution" },
+    { "id": "core_flows", "title": "Core Flows" },
+    { "id": "research", "title": "Research" }
+  ],
+  "sections": [
+    {
+      "id": "overview",
+      "label": "OVERVIEW",
+      "title": "Is it a social issue or Infrastructural issue?",
+      "markdownFile": "assets/markdown/zoa/overview.md",
+      "image": "assets/overview_placeholder.png"
+    },
+    {
+      "id": "problem",
+      "label": "PROBLEM",
+      "title": "Infrastructure was never the issue.",
+      "markdownFile": "assets/markdown/zoa/problem.md",
+      "image": "assets/problem_placeholder.png"
+    },
+    {
+      "id": "solution",
+      "label": "SOLUTION",
+      "title": "Zoa: The token based award system for separating household trash",
+      "markdownFile": "assets/markdown/zoa/solution.md",
+      "image": "assets/solution_placeholder.png"
+    }
+  ]
+}
