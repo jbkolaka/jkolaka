@@ -21,6 +21,7 @@ class _CirclePointerState extends State<CirclePointer> {
       children: [
         widget.child,
         MouseRegion(
+          opaque: false,
           cursor: SystemMouseCursors.none,
           onHover: (PointerEvent event) {
             setState(() => _position = event.localPosition);
