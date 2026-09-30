@@ -103,6 +103,12 @@ class AppTheme {
       textTheme: textTheme,
 
       appBarTheme: AppBarTheme(
+        backgroundColor: isLight
+            ? AppBackgroundColors.lightBackground
+            : AppBackgroundColors.darkBackground,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
         titleTextStyle: textTheme.labelSmall!.copyWith(
           color: textColors.secondary,
         ),
