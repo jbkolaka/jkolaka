@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../theme/spacing/app_spacing.dart';
+import '../../../theme/typography/app_typography.dart';
+import '../../../widgets/portfolio_footer.dart';
+import '../widget/project_grid.dart';
 import '../widget/work_list.dart';
 
 /// Body content of the WORK section, rendered inside the shared portfolio
@@ -8,69 +11,55 @@ import '../widget/work_list.dart';
 class WorkBody extends StatelessWidget {
   const WorkBody({super.key});
 
-  static const List<Color> _gridColors = [
-    Color(0xFF0F62FE),
-    Color(0xFFEE5396),
-    Color(0xFF6FDD8B),
-    Color(0xFFFF832B),
-    Color(0xFF8A3FFC),
-    Color(0xFFF1C21B),
-    Color(0xFF4589FF),
-    Color(0xFFD12771),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool wide = MediaQuery.sizeOf(context).width >= 1200;
+    final double heroSize = wide ? 56 : 44;
+
+    return ListView(
+      padding: const EdgeInsets.all(AppSpacing.spacing06),
       children: [
-        const Divider(height: 1),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.spacing06),
-            child: ListView(
-              padding: const EdgeInsets.all(AppSpacing.spacing06),
-              children: [
-                const SizedBox(height: AppSpacing.spacing10 * 2),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        const SizedBox(height: 160),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: Text.rich(
+                TextSpan(
+                  text: 'I\'m a mobile and backend developer ',
+                  style: TextStyle(
+                    fontFamily: AppTypography.fontFamily,
+                    fontSize: heroSize,
+                    height: 1.1,
+                    letterSpacing: -0.5,
+                    fontWeight: FontWeight.w500,
+                    color: scheme.onSurface,
+                  ),
                   children: [
-                    Expanded(
-                      child: Text(
-                        'I\'m a mobile and backend developer \nso full stack',
-                        style: Theme.of(context).textTheme.headlineMedium,
+                    TextSpan(
+                      text: 'so full stack',
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontFamily,
+                        fontSize: heroSize,
+                        height: 1.1,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic,
+                        color: scheme.onSurface,
                       ),
                     ),
-                    const Expanded(child: WorkList()),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.spacing06),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  mainAxisSpacing: AppSpacing.spacing04,
-                  crossAxisSpacing: AppSpacing.spacing04,
-                  children: [
-                    for (int i = 0; i < 8; i++)
-                      InkWell(
-                        onTap: () =>
-                            Navigator.pushNamed(context, '/project'),
-                        borderRadius: BorderRadius.circular(AppRadius.card),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: _gridColors[i % _gridColors.length],
-                            borderRadius: BorderRadius.circular(
-                              AppRadius.card,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ],
+              ),
             ),
-          ),
+            const Expanded(child: WorkList()),
+          ],
         ),
+        const SizedBox(height: AppSpacing.spacing07),
+        const ProjectGrid(),
+        const SizedBox(height: AppSpacing.spacing10 * 2),
+        const PortfolioFooter(),
       ],
     );
   }

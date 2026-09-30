@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../theme/spacing/app_spacing.dart';
+import '../../../theme/typography/app_typography.dart';
 import '../data/work_model.dart';
 
+/// Career timeline in Rachel Chen's style: each entry is a mono, muted year
+/// followed by the company (shifts to primary on hover) and the role. Stacked
+/// below 1200px, side by side above, mirroring her breakpoints.
 class WorkList extends StatefulWidget {
   const WorkList({super.key});
 
@@ -41,36 +45,119 @@ class _WorkListState extends State<WorkList> {
       return const SizedBox.shrink();
     }
 
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: items.length,
-      separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.spacing02),
-      itemBuilder: (context, index) {
-        final WorkExperience item = items[index];
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text('${item.year}', style: Theme.of(context).textTheme.bodySmall),
-            const SizedBox(width: AppSpacing.spacing04),
-            Expanded(
-              child: Text(
-                item.company,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ),
-            Flexible(
-              child: Text(
-                item.role,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ),
-          ],
-        );
-      },
+    final bool wide = MediaQuery.sizeOf(context).width >= 1200;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (var i = 0; i < items.length; i++) ...[
+          if (i > 0) const SizedBox(height: AppSpacing.spacing03),
+          _TimelineRow(item: items[i], wide: wide),
+        ],
+      ],
+    );
+  }
+}
+
+class _TimelineRow extends StatelessWidget {
+  const _TimelineRow({required this.item, required this.wide});
+
+  final WorkExperience item;
+  final bool wide;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final Widget year = SizedBox(
+      width: 104,
+      child: Text(
+        '${item.year}',
+        style: const TextStyle(
+          fontFamily: AppTypography.monoFontFamily,
+          fontSize: 15,
+          height: 1.3,
+        ),
+      ),
+    );
+    final Widget company = _CompanyLink(name: item.company);
+    final Widget role = Text(
+      item.role,
+      maxLines: wide ? 1 : 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontFamily: AppTypography.fontFamily,
+        fontSize: 15,
+        height: 1.3,
+        color: scheme.onSurfaceVariant,
+      ),
+    );
+
+    if (wide) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.baseline,
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          year,
+          const SizedBox(width: AppSpacing.spacing02),
+          SizedBox(width: 224, child: company),
+          const SizedBox(width: AppSpacing.spacing02),
+          Expanded(child: role),
+        ],
+      );
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        year,
+        const SizedBox(width: AppSpacing.spacing02),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              company,
+              const SizedBox(height: AppSpacing.spacing01),
+              role,
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CompanyLink extends StatefulWidget {
+  const _CompanyLink({required this.name});
+
+  final String name;
+
+  @override
+  State<_CompanyLink> createState() => _CompanyLinkState();
+}
+
+class _CompanyLinkState extends State<_CompanyLink> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: AnimatedDefaultTextStyle(
+        duration: const Duration(milliseconds: 150),
+        curve: Curves.easeOut,
+        style: TextStyle(
+          fontFamily: AppTypography.fontFamily,
+          fontSize: 15,
+          height: 1.3,
+          color: _hovered ? scheme.primary : scheme.onSurface,
+        ),
+        child: Text(
+          widget.name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
     );
   }
 }
