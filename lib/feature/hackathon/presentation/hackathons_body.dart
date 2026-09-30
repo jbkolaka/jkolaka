@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../theme/spacing/app_spacing.dart';
+import '../../../widgets/portfolio_footer.dart';
 
 /// Body content of the HACKATHONS section, rendered inside the shared
 /// portfolio scaffold alongside the work body.
@@ -9,15 +10,22 @@ class HackathonsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.spacing07),
-        child: Text(
-          'Hackathons I\'ve participated in',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineMedium,
+    return Column(
+      children: [
+        Expanded(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.spacing07),
+              child: Text(
+                'Hackathons I\'ve participated in',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
+          ),
         ),
-      ),
+        const PortfolioFooter(),
+      ],
     );
   }
 }
