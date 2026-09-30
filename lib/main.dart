@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'feature/project/presentation/project_page.dart';
-import 'feature/work/presentation/work_page.dart';
 import 'feature/work/widget/circle_pointer.dart';
 import 'theme/app_theme.dart';
+import 'widgets/portfolio_shell.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/project': (context) => const ProjectPage(),
       },
-      home: const WorkPage(),
+      home: const PortfolioShell(),
     );
   }
 }

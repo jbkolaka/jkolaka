@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../theme/spacing/app_spacing.dart';
 import '../widget/work_list.dart';
 
-class WorkPage extends StatelessWidget {
-  const WorkPage({super.key});
+/// Body content of the WORK section, rendered inside the shared portfolio
+/// scaffold so only this portion changes when switching sections.
+class WorkBody extends StatelessWidget {
+  const WorkBody({super.key});
 
   static const List<Color> _gridColors = [
     Color(0xFF0F62FE),
@@ -19,76 +21,13 @@ class WorkPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  Text(
-                    'JOE KOLAKA',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const SizedBox(width: AppSpacing.spacing03),
-                  Flexible(
-                    child: Text(
-                      'MOBILE DEVELOPER',
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.spacing03),
-                  const Text('*'),
-                  const SizedBox(width: AppSpacing.spacing03),
-                  Flexible(
-                    child: Text(
-                      'GO BACKEND DEVELOPER',
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Flexible(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text('WORK'),
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.spacing03),
-                  Flexible(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text('HACKATHONS'),
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.spacing03),
-                  Flexible(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text('RESUME'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: Column(
-        children: [
-          const Divider(height: 1),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.spacing06),
-              child: ListView(
+    return Column(
+      children: [
+        const Divider(height: 1),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.spacing06),
+            child: ListView(
               padding: const EdgeInsets.all(AppSpacing.spacing06),
               children: [
                 const SizedBox(height: AppSpacing.spacing10 * 2),
@@ -111,29 +50,28 @@ class WorkPage extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: AppSpacing.spacing04,
                   crossAxisSpacing: AppSpacing.spacing04,
-children: [
-                        for (int i = 0; i < 8; i++)
-                          InkWell(
-                            onTap: () =>
-                                Navigator.pushNamed(context, '/project'),
-                            borderRadius: BorderRadius.circular(AppRadius.card),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: _gridColors[i % _gridColors.length],
-                                borderRadius: BorderRadius.circular(
-                                  AppRadius.card,
-                                ),
-                              ),
+                  children: [
+                    for (int i = 0; i < 8; i++)
+                      InkWell(
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/project'),
+                        borderRadius: BorderRadius.circular(AppRadius.card),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: _gridColors[i % _gridColors.length],
+                            borderRadius: BorderRadius.circular(
+                              AppRadius.card,
                             ),
                           ),
-                      ],
+                        ),
+                      ),
+                  ],
                 ),
               ],
             ),
-            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
