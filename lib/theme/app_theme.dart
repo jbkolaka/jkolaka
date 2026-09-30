@@ -108,13 +108,7 @@ class AppTheme {
         ),
       ),
 
-      // Motion tokens feed both page transitions and interaction timings.
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          // Expressive entrance curve feeds every Android route transition.
-          TargetPlatform.android: _AppPageTransitionsBuilder(),
-        },
-      ),
+      // Motion tokens feed interactions timings.
       splashFactory: InkSparkle.splashFactory,
 
       inputDecorationTheme: _inputDecoration(
@@ -275,44 +269,6 @@ class AppTheme {
     );
   }
 }
-
-/// Custom page transition that applies the expressive standard easing
-/// (cubic-bezier(0.4, 0.14, 0.3, 1)) over the 400ms slow-01 duration.
-class _AppPageTransitionsBuilder extends PageTransitionsBuilder {
-  const _AppPageTransitionsBuilder();
-
-  @override
-  Widget buildTransitions<T>(
-    PageRoute<T> route,
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
-    final CurvedAnimation curved = CurvedAnimation(
-      parent: animation,
-      curve: _easeExpressiveStandard,
-      reverseCurve: _easeProductiveExit,
-    );
-
-    return FadeTransition(
-      opacity: curved,
-      child: SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(0, 0.04),
-          end: Offset.zero,
-        ).animate(curved),
-        child: child,
-      ),
-    );
-  }
-}
-
-/// Expressive standard easing, cubic-bezier(0.4, 0.14, 0.3, 1).
-const Cubic _easeExpressiveStandard = Cubic(0.4, 0.14, 0.3, 1);
-
-/// Productive exit easing, cubic-bezier(0.2, 0, 0.3, 1).
-const Cubic _easeProductiveExit = Cubic(0.2, 0, 0.3, 1);
 
 /// Small adapter that picks the correct token set per brightness.
 abstract class AppTextColorSet {
