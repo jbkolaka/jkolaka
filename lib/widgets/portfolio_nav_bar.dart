@@ -5,7 +5,7 @@ import '../theme/spacing/app_spacing.dart';
 /// Which top-level section is currently shown. Drives the nav-bar links.
 enum PortfolioSection { work, hackathons }
 
-/// Shared portfolio chrome — brand row plus WORK / HACKATHONS / RESUME links.
+/// Shared portfolio chrome — brand row plus WORK / HACKATHONS links.
 /// The active section stays primary; others shift to primary on hover, with
 /// no button background (Rachel Chen style).
 class PortfolioNavBar extends StatelessWidget implements PreferredSizeWidget {
@@ -74,8 +74,6 @@ class PortfolioNavBar extends StatelessWidget implements PreferredSizeWidget {
                         onSectionSelected(PortfolioSection.hackathons),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.spacing04),
-                Flexible(child: _NavLink(label: 'RESUME', onTap: () {})),
               ],
             ),
           ),
