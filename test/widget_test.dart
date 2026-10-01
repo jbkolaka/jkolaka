@@ -21,6 +21,10 @@ void main() {
     await tester.tap(find.text('HACKATHONS'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Hackathons I\'ve participated in'), findsOneWidget);
+    expect(
+      find.text('Hackathons & silly little side quests.'),
+      findsOneWidget,
+    );
+    expect(find.text('Greentech'), findsNWidgets(2));
   });
 }
