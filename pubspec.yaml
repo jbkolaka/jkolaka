@@ -61,9 +61,11 @@ flutter:
   assets:
     - lib/feature/work/data/work.json
     - lib/feature/work/data/projects.json
+    - lib/feature/hackathon/data/hackathons.json
     - lib/feature/project/data/zoa/json/zoa.json
     - assets/markdown/zoa/
-    - assets/Images/Zoa/
+    - assets/Images/Projects/Zoa/
+    - assets/Images/Hackathon and Conference/Greentech/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
