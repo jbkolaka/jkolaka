@@ -3,12 +3,14 @@
     "id": 1,
     "year": 2024,
     "company": "Lake Basin Development Authority",
-    "role": "ICT help desk attachee"
+    "role": "ICT help desk attachee",
+    "url": "https://www.lbda.go.ke/"
   },
   {
     "id": 2,
     "year": 2026,
     "company": "Zone01 Kisumu",
-    "role": "Software apprentice"
+    "role": "Software apprentice",
+    "url": "https://www.zone01kisumu.ke/"
   }
 ]

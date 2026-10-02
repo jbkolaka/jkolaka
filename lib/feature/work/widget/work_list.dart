@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../../theme/spacing/app_spacing.dart';
 import '../../../theme/typography/app_typography.dart';
+import '../../../widgets/app_links.dart';
 import '../data/work_model.dart';
 
 /// Career timeline in Rachel Chen's style: each entry is a mono, muted year
@@ -78,7 +79,10 @@ class _TimelineRow extends StatelessWidget {
         ),
       ),
     );
-    final Widget company = _CompanyLink(name: item.company);
+    final Widget company = _CompanyLink(
+      name: item.company,
+      url: item.url,
+    );
     final Widget role = Text(
       item.role,
       maxLines: wide ? 1 : 2,
@@ -126,9 +130,10 @@ class _TimelineRow extends StatelessWidget {
 }
 
 class _CompanyLink extends StatefulWidget {
-  const _CompanyLink({required this.name});
+  const _CompanyLink({required this.name, required this.url});
 
   final String name;
+  final String url;
 
   @override
   State<_CompanyLink> createState() => _CompanyLinkState();
@@ -140,22 +145,27 @@ class _CompanyLinkState extends State<_CompanyLink> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool linked = widget.url.isNotEmpty;
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
-      child: AnimatedDefaultTextStyle(
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.easeOut,
-        style: TextStyle(
-          fontFamily: AppTypography.fontFamily,
-          fontSize: 15,
-          height: 1.3,
-          color: _hovered ? scheme.primary : scheme.onSurface,
-        ),
-        child: Text(
-          widget.name,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+      child: GestureDetector(
+        onTap: linked ? () => AppLinks.open(context, widget.url) : null,
+        behavior: HitTestBehavior.opaque,
+        child: AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeOut,
+          style: TextStyle(
+            fontFamily: AppTypography.fontFamily,
+            fontSize: 15,
+            height: 1.3,
+            color: _hovered ? scheme.primary : scheme.onSurface,
+          ),
+          child: Text(
+            widget.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );

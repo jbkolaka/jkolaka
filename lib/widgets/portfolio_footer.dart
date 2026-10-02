@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/spacing/app_spacing.dart';
+import 'app_links.dart';
 
 /// Rachel Chen-style footer: a bordered strip with "Designed + Coded with ♥"
 /// on the left and social links on the right. Links shift to primary on hover.
@@ -89,12 +90,15 @@ class _SignatureState extends State<_Signature> {
 class _SocialLinks extends StatelessWidget {
   const _SocialLinks();
 
-  static const List<String> _labels = [
-    'Linkedin',
-    'EMAIL',
-    'X',
-    'Github',
-    'Devpost',
+  static const List<({String label, String url})> _links = [
+    (
+      label: 'Linkedin',
+      url: 'https://www.linkedin.com/in/kolaka-joe-867985343/',
+    ),
+    (label: 'EMAIL', url: 'mailto:joekolakab@gmail.com'),
+    (label: 'X', url: 'https://x.com/JoeKolaka'),
+    (label: 'Github', url: 'https://github.com/jbkolaka'),
+    (label: 'Devto', url: 'https://dev.to/jkolaka'),
   ];
 
   @override
@@ -103,16 +107,17 @@ class _SocialLinks extends StatelessWidget {
       spacing: AppSpacing.spacing07,
       runSpacing: AppSpacing.spacing03,
       children: [
-        for (final label in _labels) _FooterLink(label: label),
+        for (final link in _links) _FooterLink(label: link.label, url: link.url),
       ],
     );
   }
 }
 
 class _FooterLink extends StatefulWidget {
-  const _FooterLink({required this.label});
+  const _FooterLink({required this.label, required this.url});
 
   final String label;
+  final String url;
 
   @override
   State<_FooterLink> createState() => _FooterLinkState();
@@ -128,7 +133,7 @@ class _FooterLinkState extends State<_FooterLink> {
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () => AppLinks.open(context, widget.url),
         behavior: HitTestBehavior.opaque,
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 150),
